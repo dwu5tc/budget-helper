@@ -6,7 +6,7 @@ const Login = ({ handleLogin }) => {
 	return (
 		<div className="login">
 			<p>hello from login</p>
-			<button className="login-button" onClick={() => handleLogin('dean')}>Login</button>
+			<button className="login-button" onClick={handleLogin}>Login</button>
 		</div>
 	);
 }
