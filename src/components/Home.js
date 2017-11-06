@@ -2,12 +2,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import AddExpenseContainer from '../containers/AddExpenseContainer';
+
 export default class Home extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			expenses: [],
-			month: null,
+			currDate: new Date(),
+			selectedDate: null,
 			budget: null,
 			viewBy: 'month',
 		};
@@ -25,12 +28,6 @@ export default class Home extends Component {
 	monthChange(month) {
 		this.setState({
 			month
-		});
-	}
-
-	addExpense(expense) {
-		this.setState({
-			expenses: [...this.state.expenses, expense]
 		});
 	}
 
@@ -59,7 +56,7 @@ export default class Home extends Component {
 			}],
 			budget: 750,
 			viewBy: 'month',
-
+			selectedDate: this.state.currDate
 		});
 	}
 
@@ -67,22 +64,20 @@ export default class Home extends Component {
 		return (
 			<div className="home">
 				<button className="logout-button" onClick={this.props.handleLogout}>Logout</button>
-				{/* <ViewFilter 
+				{/*<ViewFilter 
 					handleViewChange={this.viewChange} 
+				/>*/}
+				{/*<CalendarContainer 
+					{...this.state} // pass all to props
+				/>*/}
+				<AddExpenseContainer 
+					currDate={this.state.currDate}
 				/>
-				<CalendarContainer 
+				{/*<Summary 
 					expenses={this.state.expenses}
 					budget={this.state.budget}
-					viewBy={this.state.viewBy}
-				/>
-				<AddExpense 
-					day={this.state.selectedDate}
-					handleAddExpense={this.addExpense}
-				/>
-				<Summary 
-					budget={this.state.budget}
-					expenses={this.state.expenses}
-				/> */}
+					currDate={this.state.currDate}
+				/>*/}
 			</div>
 		);
 	}
@@ -90,6 +85,5 @@ export default class Home extends Component {
 
 Home.propTypes = {
 	user: PropTypes.string.isRequired,
-	logout: PropTypes.func.isRequired
-
+	handleLogout: PropTypes.func.isRequired
 }
